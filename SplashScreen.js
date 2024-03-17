@@ -8,7 +8,7 @@ const SplashScreen = ({ fadeAnim }) => (
     style={[
       StyleSheet.absoluteFill,
       styles.splashScreen,
-      { opacity: fadeAnim },
+      { opacity: fadeAnim, duration: 250 },
     ]}
   >
     <Image
