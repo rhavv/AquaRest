@@ -5,6 +5,10 @@ import { Link } from 'expo-router'
 const HomeScreen = ({ navigation }) => {
     const homeOpacity = useRef(new Animated.Value(0)).current;
 
+    const handleChatPress = () => {
+        navigation.navigate('ChatScreen');
+    };
+
     useEffect(() => {
         Animated.timing(homeOpacity, {
             toValue: 1,
@@ -28,10 +32,11 @@ const HomeScreen = ({ navigation }) => {
                         source={require('./assets/BannerLogo.png')}
                         style={styles.BannerLogo}
                     />
-                    <TouchableOpacity>
+
+                    <TouchableOpacity onPress={handleChatPress}>
                         <Image
-                            source={require('./assets/SettingsGear.png')}
-                            style={styles.SettingsGear}
+                            source={require('./assets/chat.png')}
+                            style={styles.ChatButton}
                         />
                     </TouchableOpacity>
 
@@ -147,6 +152,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '200',
         letterSpacing: 10,
+    },
+    ChatButton: {
+        width: 25,
+        height: 25,
+        resizeMode: 'contain'
     },
     textMeditation: {
         color: '#00D77D',

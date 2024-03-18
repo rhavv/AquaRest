@@ -8,6 +8,7 @@ import HomeScreen from './HomeScreen';
 import HydrateScreen from './HydrateScreen';
 import SleepScreen from './SleepScreen';
 import MeditateScreen from './MeditateScreen';
+import ChatScreen from './ChatScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,21 +41,22 @@ export default function App() {
     });
   }, []);
 
-  
+
 
   return (
     <View style={{ flex: 1 }}>
-    <StatusBar style = "auto" />
+      <StatusBar style="auto" />
       {isSplashScreenVisible ? (
-        <SplashScreen fadeAnim= {fadeAnim} />
+        <SplashScreen fadeAnim={fadeAnim} />
       ) : (
         <Animated.View style={{ opacity: homeOpacity, flex: 1 }}>
           <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-              <Stack.Screen name="HydrateScreen" component={HydrateScreen} options={{ headerShown: false }}/>
-              <Stack.Screen name="SleepScreen" component={SleepScreen} options={{ headerShown: false }}/>
-              <Stack.Screen name="MeditateScreen" component={MeditateScreen} options={{ headerShown: false }}/>
+              <Stack.Screen name="HydrateScreen" component={HydrateScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="SleepScreen" component={SleepScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="MeditateScreen" component={MeditateScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="ChatScreen" component={ChatScreen} options={{ headerShown: false }} />
               {/* Add other screens here */}
             </Stack.Navigator>
           </NavigationContainer>

@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, TextInput, Pressable } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import {Picker} from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native';
 
 const SleepScreen = ({ navigation }) => {
-    const [sleepHours, setSleepHours] = useState('');
-    const [sleepinessLevel, setSleepinessLevel] = useState('');
+    const [sleep_time_hours, setSleepHours] = useState('');
+    const [sleepiness_level, setSleepinessLevel] = useState('');
+
+
 
     const handleSleepHoursChange = (hours) => {
         // Ensure that the input is numeric or empty
@@ -17,8 +20,8 @@ const SleepScreen = ({ navigation }) => {
     const saveSleepData = async () => {
         try {
             console.log('Saving sleep data...');
-            const currentDate = new Date().toISOString().split('T')[0];
-            const sleepData = { date: currentDate, hours: sleepHours, sleepinessLevel: sleepinessLevel };
+            const date = new Date().toISOString().split('T')[0];
+            const sleepData = { date: date, hours: sleep_time_hours, sleepinessLevel: sleepiness_level };
             const customDirectory = `${FileSystem.documentDirectory}AquaRest/`;
             const filePath = customDirectory + 'sleepData.json';
             await FileSystem.makeDirectoryAsync(customDirectory, { intermediates: true });
@@ -42,9 +45,6 @@ const SleepScreen = ({ navigation }) => {
         }
     };
     
-    
-    
-
     return (
         <View style={styles.container}>
             <SafeAreaView style={styles.container}>
@@ -59,12 +59,8 @@ const SleepScreen = ({ navigation }) => {
                         source={require('./assets/BannerLogo.png')}
                         style={styles.BannerLogo}
                     />
-                    <TouchableOpacity>
-                        <Image
-                            source={require('./assets/SettingsGear.png')}
-                            style={styles.SettingsGear}
-                        />
-                    </TouchableOpacity>
+                    
+                    
                 </View>
                 <View style={styles.inputContainer}>
                     <Text style={styles.label}>How much sleep did you get last night?</Text>
@@ -72,14 +68,14 @@ const SleepScreen = ({ navigation }) => {
                         style={styles.input}
                         keyboardType="numeric"
                         placeholder="Enter hours"
-                        value={sleepHours}
+                        value={sleep_time_hours}
                         onChangeText={handleSleepHoursChange}
                     />
                 </View>
                 <View style={styles.inputContainer}>
                     <Text style={styles.label}>Select your sleepiness level:</Text>
                     <Picker
-                        selectedValue={sleepinessLevel}
+                        selectedValue={sleepiness_level}
                         onValueChange={(itemValue) => setSleepinessLevel(itemValue)}
                     >
                         <Picker.Item label="1 - Feeling active, vital, alert, or wide awake" value="1" />
@@ -154,6 +150,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
     },
+    
     buttonText: {
         color: 'white',
         fontSize: 18,
